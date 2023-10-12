@@ -1,0 +1,20 @@
+{
+    "name": "merry-goblin/barcode-reader",
+    "description": "Sample of MerryGoblin BarcodeReader",
+    "keywords": ["zbar","qr","qrcode","decode","php"],
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Keller Alexandre"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "merry-goblin/barcode-reader": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    }
+}
