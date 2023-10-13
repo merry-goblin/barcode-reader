@@ -10,7 +10,8 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "merry-goblin/barcode-reader-composer": "dev-main"
+        "merry-goblin/barcode-reader-composer": "dev-main",
+        "ext-exif": "*"
     },
     "autoload": {
         "psr-4": {

@@ -4,6 +4,7 @@ namespace Controller;
 
 use MerryGoblin\BarcodeReader\Services\Barcode\BarcodeReader;
 
+use MerryGoblin\BarcodeReader\Services\Barcode\ParseBarcodeException;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class BarcodeController
@@ -12,6 +13,8 @@ class BarcodeController
 	{
 		$imageContent = '';
 		$tmpFilePath = '';
+        $codeType = '';
+        $codeNumber = '';
 		if (isset($_FILES['uploaded-photo'])) {
 
 			//	Uploaded file
@@ -31,7 +34,11 @@ class BarcodeController
 					//	Barcode parsing
 					$barcodeReader = new BarcodeReader();
 					$parsingResult = $barcodeReader->parse($tmpFilePath);
+                    $codeType = $parsingResult[0];
+                    $codeNumber = $parsingResult[1];
 				} catch(ProcessFailedException $e) {
+					$parsingResult = 'failed';
+				} catch(ParseBarcodeException $e) {
 					$parsingResult = 'failed';
 				}
 			}
@@ -43,6 +50,8 @@ class BarcodeController
 			'filePath' => $tmpFilePath,
 			'imageContent' => base64_encode(print_r($imageContent, true)),
 			'parsingResult' => print_r($parsingResult, true),
+			'codeType' => $codeType,
+			'codeNumber' => $codeNumber,
 		];
 
 		http_response_code(200);
